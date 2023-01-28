@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:14.5-alpine
+    restart: unless-stopped
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready"]
+#      interval: 5s
+#      timeout: 10s
+#      retries: 10
+    environment:
+      - POSTGRES_USER=gymbuddy
+      - POSTGRES_PASSWORD=gymbuddy
+    ports:
+      - 5435:5432
+
+  backend:
+    image: gymbuddy_backend:dev
+    build:
+      context: backend
+      dockerfile: "Dockerfile-backend-dev"
+    volumes:
+      - ./backend:/backend
+    ports:
+    - 8080:8080
+    depends_on:
+      - db
+    healthcheck:
+      test: curl --fail --silent http://localhost:8080/actuator/health | grep UP
+
+
+  reverse-proxy:
+    image: nginx:1.23-alpine
+    volumes:
+      - ./reverse-proxy:/etc/nginx/conf.d
+    ports:
+      - 80:80
