@@ -11,7 +11,7 @@ public class EventService {
 
     private final EventRepository eventRepository;
 
-    Page<Event> findAll(Pageable pageable){
-       return eventRepository.findAll(pageable);
+    Page<Event> findAll(Pageable pageable) {
+        return eventRepository.findAll(pageable);
     }
 }

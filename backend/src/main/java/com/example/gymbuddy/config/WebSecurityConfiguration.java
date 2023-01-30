@@ -12,15 +12,12 @@ public class WebSecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-         http
-                 .authorizeHttpRequests()
-                 .requestMatchers("/events")
-                 .permitAll()
-                 .anyRequest()
-                 .authenticated();
+        http.authorizeHttpRequests()
+                .requestMatchers("/events")
+                .permitAll()
+                .anyRequest()
+                .authenticated();
 
-         return http
-                .build();
+        return http.build();
     }
-
 }
