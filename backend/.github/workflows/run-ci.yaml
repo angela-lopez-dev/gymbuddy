@@ -1,0 +1,15 @@
+name: ci checks
+on: push
+jobs:
+  backend-checks:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+    - name : run formatting check
+      run : mvn spotless:check
+    - name: run tests
+      run : mvn compile test
+
