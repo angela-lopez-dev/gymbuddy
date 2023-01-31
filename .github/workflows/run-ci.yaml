@@ -24,6 +24,7 @@ jobs:
         with:
           node-version: 18.13.x
           cache: npm
+        working-directory: frontend
       - name : install dependencies
         working-directory: frontend
         run : npm install
