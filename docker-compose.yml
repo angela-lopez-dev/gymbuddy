@@ -30,6 +30,7 @@ services:
 
   reverse-proxy:
     image: nginx:1.23-alpine
+    network_mode: host
     volumes:
       - ./reverse-proxy:/etc/nginx/conf.d
     ports:
