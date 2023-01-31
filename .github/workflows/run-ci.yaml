@@ -9,8 +9,11 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - name : run formatting check
-      run : mvn spotless:check
+        cache: maven
+    - name : formatting check
+      run : ./mvnw spotless:check
+      working-directory: backend
     - name: run tests
-      run : mvn compile test
+      run : ./mvnw compile test
+      working-directory: backend
 
