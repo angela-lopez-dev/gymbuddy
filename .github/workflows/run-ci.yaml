@@ -16,4 +16,22 @@ jobs:
     - name: run tests
       run : ./mvnw compile test
       working-directory: backend
+  frontend-checks:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.13.x
+          cache: npm
+      - name : install dependencies
+        working-directory: frontend
+        run : npm install
+      - name : formatting check
+        working-directory: frontend
+        run: npx prettier --check .
+      - name : lint check
+        working-directory: frontend
+        run: npx eslint .
+
 
